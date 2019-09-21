@@ -2,6 +2,7 @@ package hangman;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -31,11 +32,22 @@ public class EvilHangman {
                 char userGuess = getUserInput();
                 evilGame.makeGuess(userGuess);
                 numGuess--;
-                if(numGuess != 0) System.out.printf("Sorry, there are no %c\'s\n\n", userGuess);
+                if(numGuess != 0) {
+                    if(!evilGame.patternShow.contains(Character.toString(userGuess))) System.out.printf("Sorry, there are no %c\'s\n\n", userGuess);
+                    else {
+                        int charCount = 0;
+                        String pluralSingular =  "are";
+                        for(char c : evilGame.patternShow.toCharArray()) {
+                            if( c == userGuess) charCount++;
+                        }
+                        if(charCount < 2) pluralSingular = "is";
+                        System.out.printf("Yes, there %s %d %c\'s\n\n", pluralSingular, charCount, userGuess);
+                    }
+                }
             } catch (GuessAlreadyMadeException e) { System.out.println(e.getMessage()); }
         }
         System.out.println("You lose!!");
-        System.out.printf("The word was: %s\n", "FIXME");
+        System.out.printf("The word was: %s\n", evilGame.dictionaryWords.first());
     }
 
     public static char getUserInput() {
@@ -45,7 +57,7 @@ public class EvilHangman {
             userInput = new Scanner(System.in).next().charAt(0);
             if(!Character.isAlphabetic(userInput)) System.out.println("Invalid input");
         }
-        return userInput;
+        return Character.toLowerCase(userInput);
     }
 
     public static void prompt(int wordLen, int numGuess, EvilHangmanGame eV) {
@@ -55,7 +67,7 @@ public class EvilHangman {
             for(Character c : eV.guessedLetters) System.out.printf("%c ", c);
             System.out.println();
         }
-        System.out.printf("Word: %s\n", new String(new char[wordLen]).replace("\0", "-"));
+        System.out.printf("Word: %s\n", eV.patternShow);
     }
 
 }
