@@ -18,8 +18,6 @@ public class EvilHangmanGame implements IEvilHangmanGame {
         guessedLetters.clear();
         dictionaryWords.clear();
 
-        // Default pattern
-        String defaultPattern = new String(new char[wordLength]).replace("\0", "-");
         // If the dictionary file is not empty
         if(dictionary.length() > 0) {
             // Scan the file
