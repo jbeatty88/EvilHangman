@@ -17,7 +17,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
         // Clear out previously used variable of any values
         guessedLetters.clear();
         dictionaryWords.clear();
-
+        patternShow = new String(new char[wordLength]).replace('\0', '-');
         // If the dictionary file is not empty
         if(dictionary.length() > 0) {
             // Scan the file
@@ -45,7 +45,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
         // If the user has made guesses before
         if(!guessedLetters.isEmpty()) {
             // If the uses guesses a previously guessed letter, throw this exception
-            if(guessedLetters.contains(guessLC)) throw new GuessAlreadyMadeException("You have already guessed this character");
+            if(guessedLetters.contains(guessLC)) throw new GuessAlreadyMadeException("You have already guessed this character\n");
         }
         // Add the letter to the set of guessed letters
         guessedLetters.add(guessLC);

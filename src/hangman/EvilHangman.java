@@ -58,10 +58,16 @@ public class EvilHangman {
 
     public static char getUserInput() {
         char userInput = ' ';
-        while (!Character.isAlphabetic(userInput)) {
+        String userLine = "";
+        while (!Character.isAlphabetic(userInput) || Character.isSpaceChar(userInput)) {
             System.out.print("Enter guess: ");
-            userInput = new Scanner(System.in).next().charAt(0);
-            if(!Character.isAlphabetic(userInput)) System.out.println("Invalid input");
+            userLine = new Scanner(System.in).nextLine();
+            if(userLine.isEmpty() || userLine.isBlank()) {
+                userInput = ' ';
+            }
+            else userInput = userLine.charAt(0);
+//            userInput = new Scanner(System.in).next().charAt(0);
+            if(!Character.isAlphabetic(userInput)) System.out.println("Invalid input\n");
         }
         return Character.toLowerCase(userInput);
     }
@@ -71,8 +77,9 @@ public class EvilHangman {
         System.out.print("Used letters: ");
         if(!eV.guessedLetters.isEmpty()) {
             for(Character c : eV.guessedLetters) System.out.printf("%c ", c);
-            System.out.println();
+//            System.out.println();
         }
+        System.out.println();
         System.out.printf("Word: %s\n", eV.patternShow);
     }
 
