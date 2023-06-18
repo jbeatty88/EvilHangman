@@ -1,7 +1,4 @@
 # EvilHangman
-CS240 Evil Hangman
-
-
 EvilHangmanProject
 
 ProgramDescription:​ Evil Hangman is a program that actively cheats at Hangman. Instead ofchoosing a single word that the player tries to guess, the program maintains a set of words thatit continuously pares down.  It does the latter in such a way as to minimize the player’s chanceof winning.For this program we assume a word is a sequence of letters a-z.  We also assume that lettercomparisons are case-insensitive.  Thus, ‘a’ matches either ‘a’ or ‘A’, and ‘A’ matches either ‘a’or ‘A’.
